@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PE&A Buddy</title>
+    <title>PEA Buddy</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -88,6 +88,8 @@
             return "Six Sigma uses DMAIC (Define, Measure, Analyze, Improve, Control) for process improvement.";
         } else if (userMessage.includes("process governance")) {
             return "Process governance ensures processes are followed consistently and effectively. Establishing clear roles is crucial.";
+        } else if (userMessage.includes("PE&A")) {
+            return "Process Excellence & Automation team in charge of new productivity initiatives across all Cencora businesses.";
         } else {
             return "I'm here to help! Please ask a question about our PE&A team, Continuous Improvement, Lean, or Six Sigma.";
         }
