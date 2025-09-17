@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PE&A Buddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #chatContainer {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        #chatBox {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        #userInput {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+        #inputField {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        #sendButton {
+            padding: 10px;
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .message {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background-color: #d4edda; /* Light green */
+            align-self: flex-end;
+        }
+        .bot-message {
+            background-color: #f8d7da; /* Light red */
+            align-self: flex-start;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chatContainer">
+    <div id="chatBox"></div>
+    <div id="userInput">
+        <input type="text" id="inputField" placeholder="Ask our PE&A buddy a question...">
+        <button id="sendButton">Send</button>
+    </div>
+</div>
+
+<script>
+    const chatBox = document.getElementById('chatBox');
+    const inputField = document.getElementById('inputField');
+    const sendButton = document.getElementById('sendButton');
+
+    function addMessage(content, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', type === 'user' ? 'user-message' : 'bot-message');
+        messageDiv.textContent = content;
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll
+    }
+
+    function getResponse(userMessage) {
+        // Simple response logic
+        if (userMessage.includes("Continuous Improvement")) {
+            return "Continuous Improvement focuses on incremental improvements to processes. Tools like PDCA (Plan-Do-Check-Act) can help.";
+        } else if (userMessage.includes("Lean")) {
+            return "Lean methodology seeks to eliminate waste and improve flow. Value stream mapping is a key tool.";
+        } else if (userMessage.includes("Six Sigma")) {
+            return "Six Sigma uses DMAIC (Define, Measure, Analyze, Improve, Control) for process improvement.";
+        } else if (userMessage.includes("process governance")) {
+            return "Process governance ensures processes are followed consistently and effectively. Establishing clear roles is crucial.";
+        } else {
+            return "I'm here to help! Please ask a question about our PE&A team, Continuous Improvement, Lean, or Six Sigma.";
+        }
+    }
+
+    sendButton.addEventListener('click', () => {
+        const userMessage = inputField.value.trim();
+        if (userMessage) {
+            addMessage(userMessage, 'user');
+            inputField.value = '';
+            const botResponse = getResponse(userMessage);
+            addMessage(botResponse, 'bot');
+        }
+    });
+
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+</script>
+
+</body>
+</html>
